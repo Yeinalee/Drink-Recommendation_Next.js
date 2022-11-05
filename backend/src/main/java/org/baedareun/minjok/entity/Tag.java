@@ -20,5 +20,7 @@ public class Tag {
     @JoinColumn
     private Recipe recipe;
 
+    @Column
+    @Enumerated(EnumType.STRING)
     private TagType type;
 }
