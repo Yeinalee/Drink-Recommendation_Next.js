@@ -8,11 +8,13 @@ import {
   Box,
   Stack,
   SimpleGrid,
-  Button,
+  IconButton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import DrinkCard from "../components/common/DrinkCard";
 import drinkImage from "/public/images/drink.png";
+import { AddIcon } from "@chakra-ui/icons";
+import { MOCKUP_RECIPES } from "../mockups/recipes";
 
 function MainPage() {
   const router = useRouter();
@@ -66,56 +68,29 @@ function MainPage() {
       <Heading size="lg" color="black" paddingTop="20px" paddingLeft={"20px"} paddingRight={"20px"}>
         11월의 인기 레시피
       </Heading>
-      <SimpleGrid
-        columns={2}
-        spacing="15px"
-        paddingTop="20px"
-        paddingLeft={"20px"}
-        paddingRight={"20px"}
-      >
-        <DrinkCard
-          imageSrc={drinkImage}
-          name="레시피"
-          description="한줄설명한줄설명한줄설명한줄설명한줄설명"
-          likeCount={10}
-          commentCount={10}
-        />
-        <DrinkCard
-          imageSrc={drinkImage}
-          name="레시피"
-          description="한줄설명한줄설명한줄설명한줄설명한줄설명"
-          likeCount={10}
-          commentCount={10}
-        />
-        <DrinkCard
-          imageSrc={drinkImage}
-          name="레시피"
-          description="한줄설명한줄설명한줄설명한줄설명한줄설명"
-          likeCount={10}
-          commentCount={10}
-        />
-        <DrinkCard
-          imageSrc={drinkImage}
-          name="레시피"
-          description="한줄설명한줄설명한줄설명한줄설명한줄설명"
-          likeCount={10}
-          commentCount={10}
-        />
+      <SimpleGrid columns={2} spacing="15px" padding="20px">
+        {MOCKUP_RECIPES.map((recipe) => (
+          <DrinkCard
+            key={recipe.id}
+            imageSrc={recipe.imageSrc}
+            name={recipe.name}
+            description={recipe.description}
+            likeCount={recipe.likeCount}
+            commentCount={recipe.commentCount}
+          />
+        ))}
       </SimpleGrid>
-      <Button
+      <IconButton
         backgroundColor={"primary"}
         color="white"
-        borderRadius="100"
+        borderRadius="50%"
         h="80px"
         w="80px"
-        fontSize="70px"
-        fontWeight={"light"}
-        position={"absolute"}
+        position="absolute"
         bottom="20px"
         right="20px"
-      >
-        +
-      </Button>
+        icon={<AddIcon w="36px" h="36px" />}
+      />
     </Container>
   );
 }
