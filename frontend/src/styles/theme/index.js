@@ -8,7 +8,7 @@ export const theme = extendTheme({
         backgroundColor: "gray.300",
       },
       body: {
-        bgColor: "gray.50",
+        bgColor: "#E8ECF0",
         maxWidth: "460px",
         width: "100%",
         minHeight: "100vh",
@@ -16,6 +16,13 @@ export const theme = extendTheme({
         overflowX: "hidden",
       },
     },
+  },
+
+  colors: {
+    purple: {
+      500: "#805AD5",
+    },
+    primary: "#805AD5",
   },
 
   fonts: {
