@@ -3,16 +3,33 @@ import { useRouter } from "next/router";
 import { Search2Icon } from "@chakra-ui/icons";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
-import { useCallback, useState } from "react";
-import { MOCKUP_DRINKS } from "../../mockups/drinks";
+import { useCallback, useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
+import useAlcohols from "../../hooks/useAlcohols";
 
 function IngredientsSearchPage() {
+  const [alcoholTypes, setAlcoholTypes] = useState([]);
+  useEffect(() => {
+    const data = localStorage.getItem(LOCAL_STORAGE_KEY.SEARCH_KINDS_KEY);
+    if (!data) {
+      return;
+    }
+    setAlcoholTypes(JSON.parse(data));
+  }, []);
+
+  const { data } = useAlcohols(alcoholTypes);
+
   const router = useRouter();
 
-  const [ingredients, setIngredients] = useState(
-    MOCKUP_DRINKS.map((kind) => ({ ...kind, selected: false }))
-  );
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setIngredients(data.map((ingredient) => ({ ...ingredient, selected: false })));
+  }, [data]);
 
   const [selectedCount, setSelectedCount] = useState(0);
 
