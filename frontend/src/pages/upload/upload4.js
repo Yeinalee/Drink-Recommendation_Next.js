@@ -1,14 +1,17 @@
-import { Button, Input, Text, Textarea } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftElement, SimpleGrid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { Search2Icon } from "@chakra-ui/icons";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
+import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
+import { MOCKUP_KIND_OF_DRINKS } from "../../mockups/kindOfDrink";
 
 function Upload4Page() {
   const router = useRouter();
 
   return (
     <SearchSectionLayout
-      title="추가 재료와 레시피를 적어주세요"
-      stepString="5 / 6"
+      title="필요한 주류는 뭐가 있나요?"
+      stepString="4 / 6"
       onClickPrevButton={() => {
         router.push("/upload/upload3");
       }}
@@ -17,44 +20,17 @@ function Upload4Page() {
       }}
       buttonText="다음 단계로"
     >
-      <Text fontSize="20px" fontWeight="bold">
-        재료
-      </Text>
-      <Input
-        variant="filled"
-        bgColor="white"
-        borderRadius="24px"
-        placeholder="재료 입력"
-        w="390px"
-        h="48px"
-        marginTop={"20px"}
-      />
-      <Text fontSize="20px" fontWeight="bold" paddingTop={"50px"} paddingBottom={"20px"}>
-        Step 1
-      </Text>
-      <Textarea
-        size="md"
-        placeholder="레시피 설명"
-        fontSize={"20px"}
-        focusBorderColor="white"
-        backgroundColor="white"
-        borderRadius={"24px"}
-        padding={"12px 16px 12px 16px"}
-        marginBottom="20px"
-        h="120px"
-        w="390px"
-      />
-      <Button
-        backgroundColor="white"
-        color={"black"}
-        borderRadius="24px"
-        h="72px"
-        w="390px"
-        fontSize={"24px"}
-        fontWeight="bold"
-      >
-        단계 추가
-      </Button>
+      <InputGroup size="lg" alignItems="center" marginBottom="20px">
+        {/* eslint-disable-next-line react/no-children-prop */}
+        <InputLeftElement pointerEvents="none" children={<Search2Icon color="gray.400" />} />
+        <Input variant="filled" bgColor="white" borderRadius="99px" placeholder="주류 찾기" />
+      </InputGroup>
+
+      <SimpleGrid columns={2} spacing="20px">
+        {MOCKUP_KIND_OF_DRINKS.map((kind, idx) => (
+          <SimpleDrinkCard key={idx} name={kind.name} imageSrc={kind.photo} />
+        ))}
+      </SimpleGrid>
     </SearchSectionLayout>
   );
 }

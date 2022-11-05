@@ -1,38 +1,60 @@
-import { Box, Button, Input, Text, Textarea } from "@chakra-ui/react";
+import { Button, Input, Text, Textarea } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { motion, useAnimation } from "framer-motion";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 
 function Upload5Page() {
   const router = useRouter();
-  const controls = useAnimation();
-  const startAnimation = () => controls.start("hover");
-  const stopAnimation = () => controls.stop();
 
   return (
     <SearchSectionLayout
-      title="완성된 사진을 보여주세요!"
-      stepString="6 / 6"
+      title="추가 재료와 레시피를 적어주세요"
+      stepString="5 / 6"
       onClickPrevButton={() => {
         router.push("/upload/upload4");
       }}
       onClickNextButton={() => {
-        router.push("/");
+        router.push("/upload/upload6");
       }}
-      buttonText="완성!"
+      buttonText="다음 단계로"
     >
-      사진 추가
+      <Text fontSize="20px" fontWeight="bold">
+        재료
+      </Text>
       <Input
-        type="file"
-        accept="image/*"
+        variant="filled"
+        bgColor="white"
+        borderRadius="24px"
+        placeholder="재료 입력"
+        w="390px"
+        h="48px"
+        marginTop={"20px"}
+      />
+      <Text fontSize="20px" fontWeight="bold" paddingTop={"50px"} paddingBottom={"20px"}>
+        Step 1
+      </Text>
+      <Textarea
+        size="md"
+        placeholder="레시피 설명"
+        fontSize={"20px"}
+        focusBorderColor="white"
+        backgroundColor="white"
+        borderRadius={"24px"}
+        padding={"12px 16px 12px 16px"}
+        marginBottom="20px"
+        h="120px"
+        w="390px"
+      />
+      <Button
+        backgroundColor="white"
+        color={"black"}
         borderRadius="24px"
         h="72px"
         w="390px"
-        onDragEnter={startAnimation}
-        onDragLeave={stopAnimation}
-        aria-hidden="true"
-        //opacity="0" //하면 그냥 안보임..
-      />
+        fontSize={"24px"}
+        fontWeight="bold"
+      >
+        단계 추가
+      </Button>
     </SearchSectionLayout>
   );
 }
