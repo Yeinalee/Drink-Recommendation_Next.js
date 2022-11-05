@@ -20,5 +20,5 @@ public class Tag {
     @JoinColumn
     private Recipe recipe;
 
-    private TagType name;
+    private TagType type;
 }
