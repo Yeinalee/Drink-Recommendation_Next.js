@@ -1,5 +1,6 @@
 package org.baedareun.minjok.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,4 +33,13 @@ public class Recipe {
 
     @Column
     private String detailSteps;
+
+    @Builder
+    public Recipe(String name, String description, String ingredient, String photo, String detailSteps) {
+        this.name = name;
+        this.description = description;
+        this.ingredient = ingredient;
+        this.photo = photo;
+        this.detailSteps = detailSteps;
+    }
 }

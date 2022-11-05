@@ -1,4 +1,7 @@
 package org.baedareun.minjok.repository;
 
-public interface RecipeRepository {
+import org.baedareun.minjok.entity.Recipe;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 }
