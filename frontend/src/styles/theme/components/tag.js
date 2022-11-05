@@ -17,10 +17,19 @@ const solid = definePartsStyle({
   },
 });
 
+const selected = definePartsStyle({
+  container: {
+    bg: "primary",
+    color: "white",
+    padding: "8px 20px",
+  },
+});
+
 export const CustomTag = defineMultiStyleConfig({
   baseStyle,
   variants: {
     solid,
+    selected,
   },
   defaultProps: {
     variant: "solid",
