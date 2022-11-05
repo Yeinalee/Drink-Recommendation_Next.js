@@ -1,21 +1,36 @@
 package org.baedareun.minjok.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.baedareun.minjok.dto.RecipeSaveRequest;
 import org.baedareun.minjok.entity.Recipe;
 import org.baedareun.minjok.repository.RecipeRepository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("recipes")
 public class RecipeController {
-
     private final RecipeRepository recipeRepository;
+
+    @PostMapping("")
+    public void save(@RequestBody RecipeSaveRequest recipeSaveRequest) {
+        recipeRepository.save(recipeSaveRequest.ToEntity()).getId();
+    }
+
+    @GetMapping("")
+    public List<Recipe> getRecipes() {
+        return recipeRepository.findAll();
+    }
+
+    @GetMapping("{id}")
+    public Optional<Recipe> getRecipeById(@PathVariable int id) {
+        return recipeRepository.findById(id);
+    }
 
     @Transactional
     @PostMapping("{id}/likeCount")
