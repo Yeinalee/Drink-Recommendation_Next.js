@@ -21,10 +21,7 @@ export const theme = extendTheme({
   },
 
   colors: {
-    purple: {
-      500: "#805AD5",
-    },
-    primary: "#805AD5",
+    primary: "#5F2FE8",
   },
 
   fonts: {
