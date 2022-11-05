@@ -1,5 +1,8 @@
 package org.baedareun.minjok.enums;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public enum AlcoholType {
     SOJU("소주", "soju.png"),
     WINE("와인", "wine.png"),
@@ -22,5 +25,12 @@ public enum AlcoholType {
 
     public String getPhotoKey() {
         return "static/alcohols/types/" + photoKey;
+    }
+
+    public static AlcoholType of(String type) {
+        return Arrays.stream(AlcoholType.values())
+            .filter(alcoholType -> Objects.equals(alcoholType.name, type))
+            .findFirst()
+            .get();
     }
 }
