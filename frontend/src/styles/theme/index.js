@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { CustomButton } from "./components/button";
 import { CustomContainer } from "./components/container";
 
 export const theme = extendTheme({
@@ -32,5 +33,6 @@ export const theme = extendTheme({
 
   components: {
     Container: CustomContainer,
+    Button: CustomButton,
   },
 });
