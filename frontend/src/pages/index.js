@@ -51,6 +51,9 @@ function MainPage() {
               children={<Search2Icon color="primary" />}
             />
             <Input
+              _hover={{
+                cursor: "pointer",
+              }}
               size="md"
               placeholder="맞춤 꿀조합 레시피를 찾아드려요!"
               fontSize={"20px"}
