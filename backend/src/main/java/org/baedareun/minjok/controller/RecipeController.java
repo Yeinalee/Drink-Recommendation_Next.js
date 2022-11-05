@@ -7,8 +7,10 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
-import org.baedareun.minjok.dto.RecipeDto;
+import org.baedareun.minjok.dto.RecipeDetailDto;
+import org.baedareun.minjok.dto.RecipeMetaDto;
 import org.baedareun.minjok.dto.RecipeListItemDto;
 import org.baedareun.minjok.dto.RecipeRequestDto;
 import org.baedareun.minjok.entity.Alcohol;
@@ -42,7 +44,7 @@ public class RecipeController {
 
     @Transactional
     @PostMapping("")
-    public RecipeDto saveRecipe(@ModelAttribute RecipeRequestDto recipeRequestDto) throws IOException {
+    public RecipeMetaDto saveRecipe(@ModelAttribute RecipeRequestDto recipeRequestDto) throws IOException {
         // 파일 저장
         MultipartFile multipartFile = recipeRequestDto.getFile();
         File file = new File("src/main/resources/static/recipes/" + multipartFile.getOriginalFilename());
@@ -69,7 +71,7 @@ public class RecipeController {
             .collect(Collectors.toList());
         tagRepository.saveAll(tags);
 
-        return new RecipeDto(recipe.getId(), recipe.getName());
+        return new RecipeMetaDto(recipe.getId(), recipe.getName());
     }
 
     @GetMapping("")
@@ -105,8 +107,14 @@ public class RecipeController {
     }
 
     @GetMapping("{id}")
-    public Optional<Recipe> getRecipeById(@PathVariable int id) {
-        return recipeRepository.findById(id);
+    public RecipeDetailDto getRecipeById(@PathVariable int id) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        List<Tag> tags = tagRepository.findAllByRecipe(recipe);
+        List<RecipeAlcohol> recipeAlcohols = recipeAlcoholRepository.findAllByRecipe(recipe);
+        List<Integer> alcoholIds = recipeAlcohols.stream()
+            .map(recipeAlcohol -> recipeAlcohol.getAlcohol().getId()).collect(Collectors.toList());
+        List<Alcohol> alcohols = alcoholRepository.findAllById(alcoholIds);
+        return new RecipeDetailDto(recipe, tags, alcohols);
     }
 
     @Transactional
