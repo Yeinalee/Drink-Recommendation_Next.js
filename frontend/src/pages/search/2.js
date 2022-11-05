@@ -1,24 +1,32 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
-import { MOCKUP_KIND_OF_DRINKS } from "../../mockups/kindOfDrink";
+import useAlcoholTypes from "../../hooks/useAlcoholTypes";
 
 function PreferredKindSearchPage() {
+  const { data } = useAlcoholTypes();
+
   const router = useRouter();
 
-  const [kinds, setKinds] = useState(
-    MOCKUP_KIND_OF_DRINKS.map((kind) => ({ ...kind, selected: false }))
-  );
+  const [kinds, setKinds] = useState([]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setKinds(data.map((kind) => ({ ...kind, selected: false })));
+  }, [data]);
 
   const [selectedCount, setSelectedCount] = useState(0);
 
   const handleClickNextButton = useCallback(() => {
     localStorage.setItem(
       LOCAL_STORAGE_KEY.SEARCH_KINDS_KEY,
-      JSON.stringify(kinds.filter((kind) => kind.selected))
+      JSON.stringify(kinds.filter((kind) => kind.selected).map((kind) => kind.name))
     );
     router.push("/search/3");
   }, [router, kinds]);
@@ -56,7 +64,7 @@ function PreferredKindSearchPage() {
             selected={kind.selected}
             key={idx}
             name={kind.name}
-            imageSrc={kind.photo}
+            imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + kind.photoKey}
           />
         ))}
       </SimpleGrid>
