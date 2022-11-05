@@ -11,10 +11,10 @@ function Upload3Page() {
       title="술에 대해서 잘 설명하는 태그를 선택해주세요"
       stepString="3 / 6"
       onClickPrevButton={() => {
-        router.push("/upload/upload2");
+        router.push("/upload/2");
       }}
       onClickNextButton={() => {
-        router.push("/upload/upload4");
+        router.push("/upload/4");
       }}
       buttonText="다음 단계로"
     >

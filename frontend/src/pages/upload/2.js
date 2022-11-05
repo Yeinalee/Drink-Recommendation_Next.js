@@ -10,10 +10,10 @@ function Upload2Page() {
       title="술에 대해 간단히 소개해주세요"
       stepString="2 / 6"
       onClickPrevButton={() => {
-        router.push("/upload/upload1");
+        router.push("/upload/1");
       }}
       onClickNextButton={() => {
-        router.push("/upload/upload3");
+        router.push("/upload/3");
       }}
       buttonText="다음 단계로"
     >

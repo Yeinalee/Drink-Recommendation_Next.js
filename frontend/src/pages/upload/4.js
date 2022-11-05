@@ -13,10 +13,10 @@ function Upload4Page() {
       title="필요한 주류는 뭐가 있나요?"
       stepString="4 / 6"
       onClickPrevButton={() => {
-        router.push("/upload/upload3");
+        router.push("/upload/3");
       }}
       onClickNextButton={() => {
-        router.push("/upload/upload5");
+        router.push("/upload/5");
       }}
       buttonText="다음 단계로"
     >

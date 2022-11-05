@@ -13,7 +13,7 @@ function UploadStartPage() {
         router.push("/");
       }}
       onClickNextButton={() => {
-        router.push("/upload/upload2");
+        router.push("/upload/2");
       }}
       buttonText="다음 단계로"
     >

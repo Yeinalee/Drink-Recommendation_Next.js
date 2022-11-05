@@ -10,10 +10,10 @@ function Upload5Page() {
       title="추가 재료와 레시피를 적어주세요"
       stepString="5 / 6"
       onClickPrevButton={() => {
-        router.push("/upload/upload4");
+        router.push("/upload/4");
       }}
       onClickNextButton={() => {
-        router.push("/upload/upload6");
+        router.push("/upload/6");
       }}
       buttonText="다음 단계로"
     >

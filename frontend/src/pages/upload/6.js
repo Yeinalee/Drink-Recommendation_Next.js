@@ -14,7 +14,7 @@ function Upload6Page() {
       title="완성된 사진을 보여주세요!"
       stepString="6 / 6"
       onClickPrevButton={() => {
-        router.push("/upload/upload5");
+        router.push("/upload/5");
       }}
       onClickNextButton={() => {
         router.push("/");
