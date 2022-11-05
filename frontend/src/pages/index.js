@@ -74,6 +74,7 @@ function MainPage() {
       <SimpleGrid columns={2} spacing="15px" padding="20px">
         {MOCKUP_RECIPES.map((recipe) => (
           <DrinkCard
+            id={recipe.id}
             key={recipe.id}
             imageSrc={recipe.imageSrc}
             name={recipe.name}
