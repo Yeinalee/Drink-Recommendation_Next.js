@@ -23,4 +23,9 @@ public class Tag {
     @Column
     @Enumerated(EnumType.STRING)
     private TagType type;
+
+    public Tag(Recipe recipe, TagType type) {
+        this.recipe = recipe;
+        this.type = type;
+    }
 }
