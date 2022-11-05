@@ -47,7 +47,7 @@ public class RecipeController {
     public RecipeMetaDto saveRecipe(@ModelAttribute RecipeRequestDto recipeRequestDto) throws IOException {
         // 파일 저장
         MultipartFile multipartFile = recipeRequestDto.getFile();
-        File file = new File("src/main/resources/static/recipes/" + multipartFile.getOriginalFilename());
+        File file = new File("src/main/resources/static/alcohols/" + multipartFile.getOriginalFilename());
         if (!file.exists()) {
             file.mkdirs();
         }
