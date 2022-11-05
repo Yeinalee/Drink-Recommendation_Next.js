@@ -23,8 +23,12 @@ public class RecipeController {
     private final RecipeAlcoholRepository recipeAlcoholRepository;
 
     @PostMapping("")
-    public void save(@RequestBody RecipeSaveRequest recipeSaveRequest) {
-        recipeRepository.save(recipeSaveRequest.ToEntity()).getId();
+    public String save(@ModelAttribute RecipeSaveRequest recipeSaveRequest) {
+//        recipeRepository.save(recipeSaveRequest.ToEntity()).getId();
+//        return "id: " + recipeSaveRequest.ToEntity().getId() +
+//                "\nname: " + recipeSaveRequest.ToEntity().getName();
+        System.out.println(recipeSaveRequest.getFile().getOriginalFilename());
+        return null;
     }
 
     @GetMapping("")

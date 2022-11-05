@@ -1,33 +1,27 @@
 package org.baedareun.minjok.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import org.baedareun.minjok.entity.Recipe;
+import org.baedareun.minjok.entity.Tag;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
+@Getter
+@Builder
+@AllArgsConstructor
 public class RecipeSaveRequest {
-    private int id;
-    private String name;
-    private String description;
-    private String ingredient;
-    private String photo;
-    private int likeCount;
-    private String detailSteps;
-
-    @Builder
-    public RecipeSaveRequest(String name, String description, String ingredient, String photo, String detailSteps) {
-        this.name = name;
-        this.description = description;
-        this.ingredient = ingredient;
-        this.photo = photo;
-        this.detailSteps = detailSteps;
-    }
+//    private String name;
+//    private String description;
+//    private String ingredient;
+    private MultipartFile file;
+//    private String detailSteps;
+//    private List<String> tags;
+//    private List<Integer> alcoholIds;
 
     public Recipe ToEntity() {
-        return Recipe.builder()
-                .name(name)
-                .description(description)
-                .ingredient(ingredient)
-                .photo(photo)
-                .detailSteps(detailSteps)
-                .build();
+        return null;
     }
 }
