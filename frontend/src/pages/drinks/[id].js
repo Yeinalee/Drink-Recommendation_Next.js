@@ -20,9 +20,9 @@ function DetailPage({ imageSrc, imageAlt }) {
   return (
     <>
       <Box bgColor="white" height="300px" padding="0px">
-        <VStack spacing="8px" align="flex-start" height="50px" padding="12px">
+        <VStack spacing="3px" align="flex-start" height="50px" padding="12px">
           <Flex width="100%" justify="flex-start" columnGap="12px">
-            <ChevronLeftIcon w="30px" h="30px" color="primary" />
+            <ChevronLeftIcon w="30px" h="30px" color="#5C5769" />
             <Spacer />
             <Icon as={AiFillHeart} w="24px" h="24px" color="#EE5757" />
             <Text fontSize="15px" color="black" as="b">
@@ -31,7 +31,7 @@ function DetailPage({ imageSrc, imageAlt }) {
           </Flex>
         </VStack>
 
-        <Box minWidth="200px" borderRadius="24px" bgColor="white">
+        <Box minWidth="200px" borderRadius="24px" bgColor="white" padding="20px">
           <Flex direction="column">
             <Box position="relative" height="200px">
               <Image
@@ -46,46 +46,49 @@ function DetailPage({ imageSrc, imageAlt }) {
       </Box>
 
       <Container overflow={"auto"} height="100vh">
-        <VStack spacing="8px" align="flex-start" height="90px" padding="12px">
-          <Text fontSize="20px" as="b">
+        <VStack spacing="8px" align="flex-start" height="90px" paddingTop="40px">
+          <Text fontSize="20px" as="b" gap="40px">
             아페롤 스프리츠(Aperol Spritz)
           </Text>
-          <HStack spacing={4}>
+          <HStack spacing={4} paddingTop="20px">
             <Tag
               variant="solid"
-              bgColor="primary"
+              bgColor="#5F2FE8"
               borderRadius="full"
-              fontSize="12px"
+              fontSize="15px"
               color="white"
+              height="40px"
             >
               여성이 선호하는
             </Tag>
             <Tag
               variant="solid"
-              bgColor="primary"
+              bgColor="#5F2FE8"
               borderRadius="full"
-              fontSize="12px"
+              fontSize="15px"
               color="white"
+              height="40px"
             >
               연인끼리
             </Tag>
             <Tag
               variant="solid"
-              bgColor="primary"
+              bgColor="#5F2FE8"
               borderRadius="full"
-              fontSize="12px"
+              fontSize="15px"
               color="white"
+              height="40px"
             >
               달달한
             </Tag>
           </HStack>
-          <Text fontSize="20px" as="b">
+          <Text fontSize="20px" as="b" paddingTop="20px">
             필요한 주류
           </Text>
 
           <Box minWidth="150px" borderRadius="24px" bgColor="white">
             <Flex direction="column">
-              <Box position="relative" height="150px">
+              <Box position="relative" height="150px" paddingTop="20px">
                 <Image
                   src={imageSrc ?? aperollImage}
                   alt={imageAlt ?? "주류 이미지"}
@@ -102,13 +105,13 @@ function DetailPage({ imageSrc, imageAlt }) {
             *아페롤 : 씁쓸한 비터 오렌지와 새콤한 맛으로 15도, 17도 버전 & 가격 : 750mL 기준
             38,000원
           </Text>
-          <Text fontSize="20px" as="b">
+          <Text fontSize="20px" as="b" paddingTop="20px">
             재료
           </Text>
           <Text fontSize="12px">
             프로세코 60mL, 아페롤 40mL, 탄산수 20mL, 오렌지 슬라이스 1/2조각, 큐브 얼음
           </Text>
-          <Text fontSize="20px" as="b">
+          <Text fontSize="20px" as="b" paddingTop="20px">
             레시피
           </Text>
           <Tag variant="solid" bgColor="white" borderRadius="full" color="black" fontSize="12px">
