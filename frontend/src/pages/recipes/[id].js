@@ -9,20 +9,30 @@ import {
   Tag,
   Spacer,
   Center,
+  IconButton,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import defaultDrinkImage from "/public/images/drink.png";
 import aperollImage from "/public/images/aperoll.png";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { AiFillHeart } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 function DetailPage() {
+  const router = useRouter();
+
   return (
     <Box>
       <Box bgColor="white" height="300px" padding="12px">
         <VStack spacing="3px" align="flex-start" height="50px" padding="12px">
           <Flex width="100%" justify="flex-start" columnGap="12px">
-            <ChevronLeftIcon w="30px" h="30px" color="#5C5769" />
+            <IconButton
+              onClick={() => {
+                router.push("/");
+              }}
+              variant="ghost"
+              icon={<ChevronLeftIcon w="30px" h="30px" color="#5C5769" />}
+            />
             <Spacer />
             <Icon as={AiFillHeart} w="24px" h="24px" color="#EE5757" />
             <Text fontSize="15px" color="black" as="b">
