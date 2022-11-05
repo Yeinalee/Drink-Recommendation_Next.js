@@ -1,7 +1,11 @@
-import { Button } from "@chakra-ui/react";
+import { Container, Heading } from "@chakra-ui/react";
 
 function HomePage() {
-  return <Button>Hello world</Button>;
+  return (
+    <Container>
+      <Heading size="lg">알는체</Heading>
+    </Container>
+  );
 }
 
 export default HomePage;
