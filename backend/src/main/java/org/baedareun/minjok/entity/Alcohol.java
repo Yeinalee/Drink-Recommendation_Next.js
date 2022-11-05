@@ -29,8 +29,5 @@ public class Alcohol {
     private AlcoholType alcoholType;
 
     @Column
-    private String description;
-
-    @Column
     private String photo;
 }
