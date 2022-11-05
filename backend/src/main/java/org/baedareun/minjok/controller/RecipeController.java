@@ -1,9 +1,13 @@
 package org.baedareun.minjok.controller;
 
-import lombok.AllArgsConstructor;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.baedareun.minjok.dto.RecipeListItemDto;
 import org.baedareun.minjok.dto.RecipeSaveRequest;
 import org.baedareun.minjok.entity.Recipe;
+import org.baedareun.minjok.entity.RecipeAlcohol;
+import org.baedareun.minjok.enums.TagType;
+import org.baedareun.minjok.repository.RecipeAlcoholRepository;
 import org.baedareun.minjok.repository.RecipeRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +20,7 @@ import java.util.Optional;
 @RequestMapping("recipes")
 public class RecipeController {
     private final RecipeRepository recipeRepository;
+    private final RecipeAlcoholRepository recipeAlcoholRepository;
 
     @PostMapping("")
     public void save(@RequestBody RecipeSaveRequest recipeSaveRequest) {
@@ -23,8 +28,28 @@ public class RecipeController {
     }
 
     @GetMapping("")
-    public List<Recipe> getRecipes() {
-        return recipeRepository.findAll();
+    public List<RecipeListItemDto> getRecipes(
+        @RequestParam(value = "tag") List<String> tag,
+        @RequestParam(value = "alcoholId", required = false) List<Integer> alcoholId
+    ) {
+        List<Recipe> recipes = recipeRepository.findByTags(tag.stream().map(TagType::of).collect(
+            Collectors.toList()));
+
+        if (alcoholId != null && !alcoholId.isEmpty()) {
+            List<RecipeAlcohol> recipeAlcohols = recipeAlcoholRepository.findByAlcoholIds(alcoholId);
+            List<Integer> recipeIds = recipeAlcohols.stream()
+                .map(recipeAlcohol -> recipeAlcohol.getRecipe().getId())
+                .distinct()
+                .collect(
+                    Collectors.toList());
+            recipes = recipes.stream()
+                .filter(recipe -> recipeIds.contains(recipe.getId()))
+                .collect(Collectors.toList());
+        }
+
+        return recipes.stream()
+            .map(RecipeListItemDto::of)
+            .collect(Collectors.toList());
     }
 
     @GetMapping("{id}")
