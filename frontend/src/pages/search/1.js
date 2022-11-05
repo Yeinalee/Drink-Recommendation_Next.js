@@ -4,7 +4,7 @@ import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import { MOCKUP_KIND_OF_DRINKS } from "../../mockups/kindOfDrink";
 
-function PreferredKindSearchPage() {
+function IntroducealcoholPage() {
   const router = useRouter();
 
   return (
@@ -33,4 +33,4 @@ function PreferredKindSearchPage() {
   );
 }
 
-export default PreferredKindSearchPage;
+export default IntroducealcoholPage;
