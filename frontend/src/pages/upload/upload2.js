@@ -1,15 +1,14 @@
-import { Box, Input, Tag, Textarea, Wrap } from "@chakra-ui/react";
+import { Textarea } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
-import { MOCKUP_TAGS } from "../../mockups/tags";
 
 function Upload2Page() {
   const router = useRouter();
 
   return (
     <SearchSectionLayout
-      title="술에 대해서 잘 설명하는 태그를 선택해주세요"
-      stepString="3 / 6"
+      title="술에 대해 간단히 소개해주세요"
+      stepString="2 / 6"
       onClickPrevButton={() => {
         router.push("/upload/upload1");
       }}
@@ -18,13 +17,17 @@ function Upload2Page() {
       }}
       buttonText="다음 단계로"
     >
-      <Wrap spacing="8px">
-        {MOCKUP_TAGS.map((tag, idx) => (
-          <Tag key={idx} size="lg">
-            {tag.name}
-          </Tag>
-        ))}
-      </Wrap>
+      <Textarea
+        size="md"
+        placeholder="레시피 설명"
+        fontSize={"20px"}
+        focusBorderColor="white"
+        backgroundColor="white"
+        borderRadius={"24px"}
+        padding={"12px 16px 12px 16px"}
+        h="200px"
+        w="390px"
+      />
     </SearchSectionLayout>
   );
 }
