@@ -13,6 +13,8 @@ function PreferredKindSearchPage() {
     MOCKUP_KIND_OF_DRINKS.map((kind) => ({ ...kind, selected: false }))
   );
 
+  const [selectedCount, setSelectedCount] = useState(0);
+
   const handleClickNextButton = useCallback(() => {
     localStorage.setItem(
       LOCAL_STORAGE_KEY.SEARCH_KINDS_KEY,
@@ -30,11 +32,18 @@ function PreferredKindSearchPage() {
       }}
       onClickNextButton={handleClickNextButton}
       buttonText="다음 단계로"
+      disableButton={selectedCount <= 0}
     >
       <SimpleGrid columns={2} spacing="20px" overflowY="scroll">
         {kinds.map((kind, idx) => (
           <SimpleDrinkCard
             onClick={() => {
+              if (kind.selected) {
+                setSelectedCount(selectedCount - 1);
+              } else {
+                setSelectedCount(selectedCount + 1);
+              }
+
               setKinds([
                 ...kinds.slice(0, idx),
                 { ...kind, selected: !kind.selected },

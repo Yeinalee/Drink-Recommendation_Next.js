@@ -17,6 +17,7 @@ function SearchSectionLayout({
   onClickPrevButton,
   onClickNextButton,
   buttonText,
+  disableButton,
   children,
 }) {
   return (
@@ -55,6 +56,7 @@ function SearchSectionLayout({
             size="lg"
             width="100%"
             margin="0 auto 60px"
+            disabled={disableButton}
           >
             {buttonText}
           </Button>

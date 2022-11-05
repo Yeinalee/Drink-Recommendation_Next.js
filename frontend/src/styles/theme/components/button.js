@@ -22,6 +22,9 @@ export const CustomButton = defineStyleConfig({
       _active: {
         bg: "purple.700",
       },
+      _disabled: {
+        bg: "primary !important",
+      },
     },
   },
 });
