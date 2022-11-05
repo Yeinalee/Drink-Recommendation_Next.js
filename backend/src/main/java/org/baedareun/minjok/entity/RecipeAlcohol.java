@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import lombok.Setter;
 
+@Setter
 @Getter
 @Entity
 @NoArgsConstructor
@@ -22,4 +24,9 @@ public class RecipeAlcohol {
     @ManyToOne
     @JoinColumn
     private Alcohol alcohol;
+
+    public RecipeAlcohol(Recipe recipe, Alcohol alcohol) {
+        this.recipe = recipe;
+        this.alcohol = alcohol;
+    }
 }

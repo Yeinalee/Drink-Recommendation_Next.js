@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    url: jdbc:mysql://knowalcohol2.cr2bymiqbhd9.ap-northeast-2.rds.amazonaws.com:3306/knowalcohol?serverTimezone=UTC&characterEncoding=UTF-8
-    password: 123456789
+    url: jdbc:mysql://localhost:3306/knowalcohol?serverTimezone=UTC&characterEncoding=UTF-8
+    password: 1234
 
   jpa:
     properties:
