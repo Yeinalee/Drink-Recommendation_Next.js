@@ -16,7 +16,7 @@ import aperollImage from "/public/images/aperoll.png";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { AiFillHeart } from "react-icons/ai";
 
-function DetailPage({ imageSrc, imageAlt }) {
+function DetailPage() {
   return (
     <Box>
       <Box bgColor="white" height="300px" padding="12px">
@@ -35,8 +35,8 @@ function DetailPage({ imageSrc, imageAlt }) {
           <Flex direction="column">
             <Box position="relative" height="200px">
               <Image
-                src={imageSrc ?? defaultDrinkImage}
-                alt={imageAlt ?? "주류 이미지"}
+                src={defaultDrinkImage}
+                alt={"주류 이미지"}
                 layout="fill"
                 objectFit="contain"
               />
@@ -45,7 +45,7 @@ function DetailPage({ imageSrc, imageAlt }) {
         </Box>
       </Box>
 
-      <Container>
+      <Container paddingBottom="80px">
         <VStack align="flex-start" paddingTop="40px" spacing="20px">
           <Text fontSize="32px" as="b">
             아페롤 스프리츠(Aperol Spritz)
@@ -89,12 +89,7 @@ function DetailPage({ imageSrc, imageAlt }) {
           <Box minWidth="150px" borderRadius="24px" bgColor="white">
             <Flex direction="column">
               <Box position="relative" height="150px" paddingTop="20px">
-                <Image
-                  src={imageSrc ?? aperollImage}
-                  alt={imageAlt ?? "주류 이미지"}
-                  layout="fill"
-                  objectFit="contain"
-                />
+                <Image src={aperollImage} alt={"주류 이미지"} layout="fill" objectFit="contain" />
               </Box>
               <Center fontSize="24px" as="b" padding="12px">
                 아페롤
@@ -152,4 +147,5 @@ function DetailPage({ imageSrc, imageAlt }) {
     </Box>
   );
 }
+
 export default DetailPage;
