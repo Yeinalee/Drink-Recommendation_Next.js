@@ -8,14 +8,14 @@ import { MOCKUP_TAGS } from "../../mockups/tags";
 function TagSearchPage() {
   const router = useRouter();
 
-  const [tags, setTags] = useState(MOCKUP_TAGS.map((tag) => ({ ...tag, selected: false })));
+  const [tags, setTags] = useState(MOCKUP_TAGS.map((tag) => ({ name: tag, selected: false })));
 
   const [selectedCount, setSelectedCount] = useState(0);
 
   const handleClickNextButton = useCallback(() => {
     localStorage.setItem(
       LOCAL_STORAGE_KEY.SEARCH_TAGS_KEY,
-      JSON.stringify(tags.filter((tag) => tag.selected))
+      JSON.stringify(tags.filter((tag) => tag.selected).map((tag) => tag.name))
     );
     router.push("/search/2");
   }, [router, tags]);
