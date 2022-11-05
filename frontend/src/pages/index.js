@@ -51,6 +51,9 @@ function MainPage() {
               children={<Search2Icon color="primary" />}
             />
             <Input
+              _hover={{
+                cursor: "pointer",
+              }}
               size="md"
               placeholder="맞춤 꿀조합 레시피를 찾아드려요!"
               fontSize={"20px"}
@@ -71,6 +74,7 @@ function MainPage() {
       <SimpleGrid columns={2} spacing="15px" padding="20px">
         {MOCKUP_RECIPES.map((recipe) => (
           <DrinkCard
+            id={recipe.id}
             key={recipe.id}
             imageSrc={recipe.imageSrc}
             name={recipe.name}
