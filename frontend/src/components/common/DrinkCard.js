@@ -17,7 +17,9 @@ function DrinkCard({ imageSrc, imageAlt, name, description, likeCount, commentCo
         </Box>
         <VStack spacing="8px" align="flex-start" height="90px" padding="12px">
           <Heading size="sm">{name}</Heading>
-          <Text fontSize="10px">{description}</Text>
+          <Text noOfLines={1} fontSize="10px">
+            {description}
+          </Text>
           <Flex width="100%" justify="flex-end" columnGap="12px">
             <HStack spacing="4px">
               <Icon as={AiFillHeart} w="12px" h="12px" color="#EE5757" />

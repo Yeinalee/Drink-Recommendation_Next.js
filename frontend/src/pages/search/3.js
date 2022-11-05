@@ -3,10 +3,34 @@ import { useRouter } from "next/router";
 import { Search2Icon } from "@chakra-ui/icons";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
-import { MOCKUP_KIND_OF_DRINKS } from "../../mockups/kindOfDrink";
+import { useCallback, useState } from "react";
+import { MOCKUP_DRINKS } from "../../mockups/drinks";
+import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
 
-function TagSearchPage() {
+function IngredientsSearchPage() {
   const router = useRouter();
+
+  const [ingredients, setIngredients] = useState(
+    MOCKUP_DRINKS.map((kind) => ({ ...kind, selected: false }))
+  );
+
+  const [selectedCount, setSelectedCount] = useState(0);
+
+  const handleClickNextButton = useCallback(() => {
+    const selectedTags = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY.SEARCH_TAGS_KEY));
+    const selectedTagIds = selectedTags.map((tag) => tag.id);
+    const selectedIngredientIds = ingredients
+      .filter((ingredient) => ingredient.selected)
+      .map((ingredient) => ingredient.id);
+
+    const tagQueries = selectedTagIds.reduce((prev, cur) => `${prev}&tag=${cur}`, "").slice(1);
+    const queryString = selectedIngredientIds.reduce(
+      (prev, cur) => `${prev}&alcoholId=${cur}`,
+      tagQueries
+    );
+
+    router.push(`/search?${queryString}`);
+  }, [router, ingredients]);
 
   return (
     <SearchSectionLayout
@@ -15,9 +39,7 @@ function TagSearchPage() {
       onClickPrevButton={() => {
         router.push("/search/2");
       }}
-      onClickNextButton={() => {
-        router.push("/search");
-      }}
+      onClickNextButton={handleClickNextButton}
       buttonText="검색하기"
     >
       <InputGroup size="lg" alignItems="center" marginBottom="20px">
@@ -27,12 +49,33 @@ function TagSearchPage() {
       </InputGroup>
 
       <SimpleGrid columns={2} spacing="20px">
-        {MOCKUP_KIND_OF_DRINKS.map((kind, idx) => (
-          <SimpleDrinkCard key={idx} name={kind.name} imageSrc={kind.photo} />
+        {ingredients.map((ingredient, idx) => (
+          <SimpleDrinkCard
+            key={idx}
+            onClick={() => {
+              if (ingredient.selected) {
+                setSelectedCount(selectedCount - 1);
+              } else {
+                setSelectedCount(selectedCount + 1);
+              }
+
+              setIngredients([
+                ...ingredients.slice(0, idx),
+                { ...ingredient, selected: !ingredient.selected },
+                ...ingredients.slice(idx + 1, ingredients.length),
+              ]);
+            }}
+            _hover={{
+              cursor: "pointer",
+            }}
+            selected={ingredient.selected}
+            name={ingredient.name}
+            imageSrc={ingredient.photo}
+          />
         ))}
       </SimpleGrid>
     </SearchSectionLayout>
   );
 }
 
-export default TagSearchPage;
+export default IngredientsSearchPage;
