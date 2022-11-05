@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Entity
@@ -28,8 +29,19 @@ public class Recipe {
     private String photo;
 
     @Column
+    @ColumnDefault("0")
     private int likeCount;
 
     @Column
     private String detailSteps;
+
+    public void incrementLikeCount() {
+        this.likeCount += 1;
+    }
+
+    public void decrementLikeCount() {
+        if (this.likeCount > 0) {
+            this.likeCount -= 1;
+        }
+    }
 }
