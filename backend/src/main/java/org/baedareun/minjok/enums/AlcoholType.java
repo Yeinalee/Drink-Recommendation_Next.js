@@ -21,6 +21,6 @@ public enum AlcoholType {
     }
 
     public String getPhotoKey() {
-        return "alcohols/types/" + photoKey;
+        return "static/alcohols/types/" + photoKey;
     }
 }
