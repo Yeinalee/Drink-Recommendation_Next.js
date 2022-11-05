@@ -33,11 +33,10 @@ function MainPage() {
         paddingTop={"40px"}
         paddingBottom={"20px"}
       >
-        <Box position="relative" height="30px" />
-        <Heading size="lg" color="black">
-          알는척
+        <Heading fontSize="24px" color="black">
+          알는체
         </Heading>
-        <Heading size="2xl" color="white" paddingTop={"30px"} paddingBottom={"30px"}>
+        <Heading fontSize="32px" color="white" paddingTop={"30px"} paddingBottom={"30px"}>
           미지의 주류 레시피의 세계에 오신걸 환영해요!
         </Heading>
         <Stack spacing={4}>
@@ -60,19 +59,24 @@ function MainPage() {
               }}
               size="md"
               placeholder="맞춤 꿀조합 레시피를 찾아드려요!"
-              fontSize={"20px"}
+              fontSize={"18px"}
               focusBorderColor="white"
               backgroundColor="white"
               borderRadius={100}
               paddingTop="10px"
               paddingBottom="10px"
-              marginBottom="20px"
               h="48px"
             />
           </InputGroup>
         </Stack>
       </Box>
-      <Heading size="lg" color="black" paddingTop="20px" paddingLeft={"20px"} paddingRight={"20px"}>
+      <Heading
+        fontSize="24px"
+        color="black"
+        paddingTop="20px"
+        paddingLeft={"20px"}
+        paddingRight={"20px"}
+      >
         11월의 인기 레시피
       </Heading>
       <Skeleton isLoaded={!loading}>
