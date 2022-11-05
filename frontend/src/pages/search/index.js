@@ -2,7 +2,7 @@ import { SimpleGrid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import DrinkCard from "../../components/common/DrinkCard";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
-import { MOCKUP_DRINKS } from "../../mockups/drinks";
+import { MOCKUP_RECIPES } from "../../mockups/recipes";
 
 function TagSearchPage() {
   const router = useRouter();
@@ -16,7 +16,7 @@ function TagSearchPage() {
       }}
     >
       <SimpleGrid columns={2} spacing="20px">
-        {MOCKUP_DRINKS.map((drink, idx) => (
+        {MOCKUP_RECIPES.map((drink, idx) => (
           <DrinkCard
             key={idx}
             imageSrc={drink.imageSrc}

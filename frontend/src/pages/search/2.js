@@ -1,28 +1,31 @@
-import { Tag, Wrap } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
+import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
-import { MOCKUP_TAGS } from "../../mockups/tags";
+import { MOCKUP_KIND_OF_DRINKS } from "../../mockups/kindOfDrink";
 
-function TagSearchPage() {
+function PreferredKindSearchPage() {
   const router = useRouter();
 
-  const [tags, setTags] = useState(MOCKUP_TAGS.map((tag) => ({ ...tag, selected: false })));
+  const [kinds, setKinds] = useState(
+    MOCKUP_KIND_OF_DRINKS.map((kind) => ({ ...kind, selected: false }))
+  );
 
   const [selectedCount, setSelectedCount] = useState(0);
 
   const handleClickNextButton = useCallback(() => {
     localStorage.setItem(
-      LOCAL_STORAGE_KEY.SEARCH_TAGS_KEY,
-      JSON.stringify(tags.filter((tag) => tag.selected))
+      LOCAL_STORAGE_KEY.SEARCH_KINDS_KEY,
+      JSON.stringify(kinds.filter((kind) => kind.selected))
     );
     router.push("/search/3");
-  }, [router, tags]);
+  }, [router, kinds]);
 
   return (
     <SearchSectionLayout
-      title="선호하시는 태그를 선택해주세요"
+      title="어떤 주종을 선호하시나요?"
       stepString="2 / 3"
       onClickPrevButton={() => {
         router.push("/search/1");
@@ -31,33 +34,34 @@ function TagSearchPage() {
       buttonText="다음 단계로"
       disableButton={selectedCount <= 0}
     >
-      <Wrap spacing="8px">
-        {tags.map((tag, idx) => (
-          <Tag
+      <SimpleGrid columns={2} spacing="20px" overflowY="scroll">
+        {kinds.map((kind, idx) => (
+          <SimpleDrinkCard
             onClick={() => {
-              if (tag.selected) {
+              if (kind.selected) {
                 setSelectedCount(selectedCount - 1);
               } else {
                 setSelectedCount(selectedCount + 1);
               }
 
-              setTags([
-                ...tags.slice(0, idx),
-                { ...tag, selected: !tag.selected },
-                ...tags.slice(idx + 1, tags.length),
+              setKinds([
+                ...kinds.slice(0, idx),
+                { ...kind, selected: !kind.selected },
+                ...kinds.slice(idx + 1, kinds.length),
               ]);
             }}
-            _hover={{ cursor: "pointer" }}
-            variant={tag.selected ? "selected" : "solid"}
+            _hover={{
+              cursor: "pointer",
+            }}
+            selected={kind.selected}
             key={idx}
-            size="lg"
-          >
-            {tag.name}
-          </Tag>
+            name={kind.name}
+            imageSrc={kind.photo}
+          />
         ))}
-      </Wrap>
+      </SimpleGrid>
     </SearchSectionLayout>
   );
 }
 
-export default TagSearchPage;
+export default PreferredKindSearchPage;

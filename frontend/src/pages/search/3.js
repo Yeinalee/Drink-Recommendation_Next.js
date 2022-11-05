@@ -3,21 +3,35 @@ import { useRouter } from "next/router";
 import { Search2Icon } from "@chakra-ui/icons";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
-import { MOCKUP_KIND_OF_DRINKS } from "../../mockups/kindOfDrink";
 import { useCallback, useState } from "react";
+import { MOCKUP_DRINKS } from "../../mockups/drinks";
+import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
 
 function IngredientsSearchPage() {
   const router = useRouter();
 
   const [ingredients, setIngredients] = useState(
-    MOCKUP_KIND_OF_DRINKS.map((kind) => ({ ...kind, selected: false }))
+    MOCKUP_DRINKS.map((kind) => ({ ...kind, selected: false }))
   );
 
   const [selectedCount, setSelectedCount] = useState(0);
 
   const handleClickNextButton = useCallback(() => {
-    const selectedIngredients = ingredients.filter((ingredient) => ingredient.selected);
-    router.push("/search");
+    const selectedTags = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY.SEARCH_TAGS_KEY));
+    const selectedTagIds = selectedTags.map((tag) => tag.id);
+    const selectedIngredientIds = ingredients
+      .filter((ingredient) => ingredient.selected)
+      .map((ingredient) => ingredient.id);
+
+    console.log(selectedTagIds, selectedIngredientIds);
+
+    const tagQueries = selectedTagIds.reduce((prev, cur) => `${prev}&tag=${cur}`, "").slice(1);
+    const queryString = selectedIngredientIds.reduce(
+      (prev, cur) => `${prev}&alcoholId=${cur}`,
+      tagQueries
+    );
+
+    router.push(`/search?${queryString}`);
   }, [router, ingredients]);
 
   return (
