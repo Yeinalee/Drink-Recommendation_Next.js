@@ -14,7 +14,7 @@ import {
 import DrinkCard from "../components/common/DrinkCard";
 import drinkImage from "/public/images/drink.png";
 
-function MainPage() {
+function MainRecipe() {
   return (
     <Container padding={"0"}>
       <Box
@@ -115,4 +115,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default MainRecipe;
