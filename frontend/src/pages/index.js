@@ -7,14 +7,16 @@ import {
   InputGroup,
   Box,
   Stack,
-  GridItem,
   SimpleGrid,
   Button,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import DrinkCard from "../components/common/DrinkCard";
 import drinkImage from "/public/images/drink.png";
 
 function MainPage() {
+  const router = useRouter();
+
   return (
     <Container padding={"0"}>
       <Box
@@ -33,7 +35,11 @@ function MainPage() {
           미지의 주류 레시피의 세계에 오신걸 환영해요!
         </Heading>
         <Stack spacing={4}>
-          <InputGroup>
+          <InputGroup
+            onClick={() => {
+              router.push("/search/0");
+            }}
+          >
             <InputLeftElement
               pointerEvents="none"
               top="5px"
@@ -53,7 +59,6 @@ function MainPage() {
               paddingBottom="10px"
               marginBottom="20px"
               h="48px"
-              w="390px"
             />
           </InputGroup>
         </Stack>
