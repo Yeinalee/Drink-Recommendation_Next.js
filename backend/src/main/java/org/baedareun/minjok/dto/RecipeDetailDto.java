@@ -27,7 +27,7 @@ public class RecipeDetailDto {
         this.name = recipe.getName();
         this.description = recipe.getDescription();
         this.ingredient = recipe.getIngredient();
-        this.photoKey = recipe.getPhoto();
+        this.photoKey = "static/alcohols/" + recipe.getPhoto();
         this.likeCount = recipe.getLikeCount();
         this.detailSteps = recipe.getDetailSteps();
         this.tags = tags.stream().map(Tag::getType).map(TagType::getName).distinct().collect(
