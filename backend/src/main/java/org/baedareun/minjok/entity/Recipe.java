@@ -1,4 +1,4 @@
-package org.baedareun.minjok.domain;
+package org.baedareun.minjok.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,21 +8,28 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Ingredient {
+public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ingredient_id")
+    @Column
     private int id;
 
-    private String type;
+    @Column
     private String name;
+
+    @Column
     private String description;
 
-    @Column(name = "photo_url")
+    @Column
+    private String ingredient;
+
+    @Column
     private String photoUrl;
 
-    @Column(name = "is_user_add")
-    private boolean isUserAdd;
+    @Column
+    private int likeCount;
 
+    @Column
+    private String detailSteps;
 }

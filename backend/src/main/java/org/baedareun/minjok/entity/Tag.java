@@ -1,4 +1,4 @@
-package org.baedareun.minjok.domain;
+package org.baedareun.minjok.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +12,11 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tag_id")
+    @Column
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id")
+    @JoinColumn
     private Recipe recipe;
 
     private String name;

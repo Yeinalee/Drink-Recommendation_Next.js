@@ -1,4 +1,4 @@
-package org.baedareun.minjok.domain;
+package org.baedareun.minjok.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,16 +13,15 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id")
+    @Column
     private int id;
 
-    @OneToMany
-    @JoinColumn(name = "Recipe")
-    @Column(name = "recipe_id")
-    private int recipeId;
+    @ManyToOne
+    @JoinColumn
+    private Recipe recipe;
 
     private String content;
 
-    @Column(name = "created_at")
+    @Column
     private Timestamp createdAt;
 }
