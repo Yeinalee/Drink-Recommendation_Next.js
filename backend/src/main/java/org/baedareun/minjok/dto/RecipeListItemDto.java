@@ -17,7 +17,7 @@ public class RecipeListItemDto {
         return new RecipeListItemDto(
             recipe.getId(),
             recipe.getName(),
-            "static/recipes/" + recipe.getPhoto(),
+            "static/alcohols/" + recipe.getPhoto(),
             recipe.getDescription(),
             recipe.getLikeCount()
         );
