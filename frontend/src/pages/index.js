@@ -81,6 +81,7 @@ function MainPage() {
         ))}
       </SimpleGrid>
       <IconButton
+        onClick={() => router.push("/upload/1")}
         backgroundColor={"primary"}
         color="white"
         borderRadius="50%"
