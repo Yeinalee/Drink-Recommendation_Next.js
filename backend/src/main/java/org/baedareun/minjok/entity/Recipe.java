@@ -25,7 +25,7 @@ public class Recipe {
     private String ingredient;
 
     @Column
-    private String photoUrl;
+    private String photo;
 
     @Column
     private int likeCount;

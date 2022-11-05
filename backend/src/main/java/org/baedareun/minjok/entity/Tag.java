@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import org.baedareun.minjok.enums.TagType;
 
 @Getter
 @Entity
@@ -19,5 +20,5 @@ public class Tag {
     @JoinColumn
     private Recipe recipe;
 
-    private String name;
+    private TagType name;
 }

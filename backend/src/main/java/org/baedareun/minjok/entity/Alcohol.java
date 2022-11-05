@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.baedareun.minjok.enums.AlcoholType;
 
 @Getter
 @Entity
@@ -22,8 +23,11 @@ public class Alcohol {
     private String name;
 
     @Column
+    private AlcoholType alcoholType;
+
+    @Column
     private String description;
 
     @Column
-    private String photoUrl;
+    private String photo;
 }
