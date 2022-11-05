@@ -10,16 +10,16 @@ public class RecipeListItemDto {
     private final int id;
     private final String name;
     private final String photoKey;
+    private final String description;
     private final int likeCount;
-    private final String detailSteps;
 
     public static RecipeListItemDto of(Recipe recipe) {
         return new RecipeListItemDto(
             recipe.getId(),
             recipe.getName(),
             "static/recipes/" + recipe.getPhoto(),
-            recipe.getLikeCount(),
-            recipe.getDetailSteps()
+            recipe.getDescription(),
+            recipe.getLikeCount()
         );
     }
 }
