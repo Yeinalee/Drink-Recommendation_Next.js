@@ -35,12 +35,11 @@ function IngredientsSearchPage() {
 
   const handleClickNextButton = useCallback(() => {
     const selectedTags = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY.SEARCH_TAGS_KEY));
-    const selectedTagIds = selectedTags.map((tag) => tag.id);
     const selectedIngredientIds = ingredients
       .filter((ingredient) => ingredient.selected)
       .map((ingredient) => ingredient.id);
 
-    const tagQueries = selectedTagIds.reduce((prev, cur) => `${prev}&tag=${cur}`, "").slice(1);
+    const tagQueries = selectedTags.reduce((prev, cur) => `${prev}&tag=${cur}`, "").slice(1);
     const queryString = selectedIngredientIds.reduce(
       (prev, cur) => `${prev}&alcoholId=${cur}`,
       tagQueries
