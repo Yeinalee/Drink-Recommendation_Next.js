@@ -1,9 +1,13 @@
-import { Button, Input, Text, Textarea } from "@chakra-ui/react";
+import { Box, Button, Input, Text, Textarea } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { motion, useAnimation } from "framer-motion";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 
 function Upload5Page() {
   const router = useRouter();
+  const controls = useAnimation();
+  const startAnimation = () => controls.start("hover");
+  const stopAnimation = () => controls.stop();
 
   return (
     <SearchSectionLayout
@@ -17,17 +21,18 @@ function Upload5Page() {
       }}
       buttonText="완성!"
     >
-      <Button
-        backgroundColor="white"
-        color={"black"}
+      사진 추가
+      <Input
+        type="file"
+        accept="image/*"
         borderRadius="24px"
         h="72px"
         w="390px"
-        fontSize={"24px"}
-        fontWeight="bold"
-      >
-        사진 추가
-      </Button>
+        onDragEnter={startAnimation}
+        onDragLeave={stopAnimation}
+        aria-hidden="true"
+        //opacity="0" //하면 그냥 안보임..
+      />
     </SearchSectionLayout>
   );
 }
