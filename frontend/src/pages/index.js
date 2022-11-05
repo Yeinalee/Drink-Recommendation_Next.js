@@ -9,14 +9,18 @@ import {
   Stack,
   SimpleGrid,
   IconButton,
+  Skeleton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import DrinkCard from "../components/common/DrinkCard";
-import drinkImage from "/public/images/drink.png";
 import { AddIcon } from "@chakra-ui/icons";
-import { MOCKUP_RECIPES } from "../mockups/recipes";
+import useSWR from "swr";
+import { fetcher } from "../utils/fetcher";
 
 function MainPage() {
+  const { data, error } = useSWR("/recipes/popular", fetcher);
+  const loading = !data && !error;
+
   const router = useRouter();
 
   return (
@@ -71,19 +75,20 @@ function MainPage() {
       <Heading size="lg" color="black" paddingTop="20px" paddingLeft={"20px"} paddingRight={"20px"}>
         11월의 인기 레시피
       </Heading>
-      <SimpleGrid columns={2} spacing="15px" padding="20px">
-        {MOCKUP_RECIPES.map((recipe) => (
-          <DrinkCard
-            id={recipe.id}
-            key={recipe.id}
-            imageSrc={recipe.imageSrc}
-            name={recipe.name}
-            description={recipe.description}
-            likeCount={recipe.likeCount}
-            commentCount={recipe.commentCount}
-          />
-        ))}
-      </SimpleGrid>
+      <Skeleton isLoaded={!loading}>
+        <SimpleGrid columns={2} spacing="15px" padding="20px">
+          {data?.map((recipe) => (
+            <DrinkCard
+              id={recipe.id}
+              key={recipe.id}
+              imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + recipe.photoKey}
+              name={recipe.name}
+              description={recipe.description}
+              likeCount={recipe.likeCount}
+            />
+          ))}
+        </SimpleGrid>
+      </Skeleton>
       <IconButton
         onClick={() => router.push("/upload/1")}
         backgroundColor={"primary"}
