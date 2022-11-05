@@ -23,8 +23,6 @@ function IngredientsSearchPage() {
       .filter((ingredient) => ingredient.selected)
       .map((ingredient) => ingredient.id);
 
-    console.log(selectedTagIds, selectedIngredientIds);
-
     const tagQueries = selectedTagIds.reduce((prev, cur) => `${prev}&tag=${cur}`, "").slice(1);
     const queryString = selectedIngredientIds.reduce(
       (prev, cur) => `${prev}&alcoholId=${cur}`,
