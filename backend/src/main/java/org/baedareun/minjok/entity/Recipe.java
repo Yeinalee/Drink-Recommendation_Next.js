@@ -43,6 +43,7 @@ public class Recipe {
         this.ingredient = ingredient;
         this.photo = photo;
         this.detailSteps = detailSteps;
+    }
     
     public void incrementLikeCount() {
         this.likeCount += 1;

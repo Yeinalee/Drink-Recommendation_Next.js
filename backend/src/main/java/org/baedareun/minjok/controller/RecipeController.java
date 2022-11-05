@@ -1,9 +1,11 @@
 package org.baedareun.minjok.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.baedareun.minjok.dto.RecipeSaveRequest;
 import org.baedareun.minjok.entity.Recipe;
 import org.baedareun.minjok.repository.RecipeRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +30,7 @@ public class RecipeController {
     @GetMapping("{id}")
     public Optional<Recipe> getRecipeById(@PathVariable int id) {
         return recipeRepository.findById(id);
+    }
 
     @Transactional
     @PostMapping("{id}/likeCount")
