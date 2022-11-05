@@ -9,6 +9,7 @@ import {
   Tag,
   Spacer,
   IconButton,
+  Wrap,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
@@ -77,11 +78,11 @@ function DetailPage() {
       </Box>
 
       <Container paddingBottom="80px" overflow="hidden">
-        <VStack align="flex-start" paddingTop="40px" spacing="20px" overflow="hidden">
+        <VStack width="100%" align="flex-start" paddingTop="40px" spacing="20px">
           <Text fontSize="32px" as="b">
             {data.name}
           </Text>
-          <HStack spacing={4}>
+          <Wrap spacing={4}>
             {data.tags.map((tag) => (
               <Tag
                 key={tag}
@@ -95,22 +96,24 @@ function DetailPage() {
                 {tag}
               </Tag>
             ))}
-          </HStack>
+          </Wrap>
 
           <Text fontSize="24px" as="b" paddingTop="20px">
             필요한 주류
           </Text>
 
-          <HStack spacing="20px" overflowX="scroll">
-            {data.alcohols.map((alcohol) => (
-              <SimpleDrinkCard
-                key={alcohol.id}
-                width="185px"
-                name={alcohol.name}
-                imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + alcohol.photoKey}
-              />
-            ))}
-          </HStack>
+          <Box width="100%" overflow="hidden">
+            <HStack spacing="20px" overflowX="scroll">
+              {data.alcohols.map((alcohol) => (
+                <SimpleDrinkCard
+                  key={alcohol.id}
+                  minWidth="185px"
+                  name={alcohol.name}
+                  imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + alcohol.photoKey}
+                />
+              ))}
+            </HStack>
+          </Box>
 
           <Text fontSize="24px" as="b" paddingTop="20px">
             재료
