@@ -24,4 +24,7 @@ public class Recipe {
 
     @Column(name = "like_count")
     private int likeCount;
+
+    @Column(name = "detail_order")
+    private String detailOrder;
 }
