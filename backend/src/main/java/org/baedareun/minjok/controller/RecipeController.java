@@ -52,6 +52,13 @@ public class RecipeController {
             .collect(Collectors.toList());
     }
 
+    @GetMapping("popular")
+    public List<RecipeListItemDto> getPopularRecipes() {
+        return recipeRepository.findAllPopular().stream()
+            .map(RecipeListItemDto::of)
+            .collect(Collectors.toList());
+    }
+
     @GetMapping("{id}")
     public Optional<Recipe> getRecipeById(@PathVariable int id) {
         return recipeRepository.findById(id);
