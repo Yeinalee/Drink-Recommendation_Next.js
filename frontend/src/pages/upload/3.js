@@ -1,14 +1,24 @@
 import { Box, Input, Tag, Textarea, Wrap } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
-import { MOCKUP_TAGS } from "../../mockups/tags";
+import useTags from "../../hooks/useTags";
 
 function Upload3Page() {
+  const { data } = useTags();
+
   const router = useRouter();
 
-  const [tags, setTags] = useState(MOCKUP_TAGS.map((tag) => ({ name: tag, selected: false })));
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setTags(data.map((tag) => ({ name: tag, selected: false })));
+  }, [data]);
 
   const [selectedCount, setSelectedCount] = useState(0);
 

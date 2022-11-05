@@ -4,6 +4,7 @@ import { useAnimation } from "framer-motion";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import { useCallback, useRef, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
+import { serverAxios } from "../../utils/axios";
 
 function Upload6Page() {
   const router = useRouter();
@@ -15,7 +16,7 @@ function Upload6Page() {
 
   const [fileName, setFileName] = useState("");
 
-  const handleClickNextButton = useCallback(() => {
+  const handleClickNextButton = useCallback(async () => {
     if (!fileRef.current || fileRef.current.files.length < 1) {
       return;
     }
@@ -38,10 +39,13 @@ function Upload6Page() {
     formData.append("detailSteps", detailSteps);
     formData.append("file", file);
 
-    // TODO: send formdata and get recipe id
+    try {
+      const response = await serverAxios.post("/recipes", formData);
 
-    const responseId = 1;
-    router.push(`/recipe/${responseId}`);
+      router.push(`/recipes/${response.data.id}`);
+    } catch (e) {
+      console.log(e);
+    }
   }, [router]);
 
   return (

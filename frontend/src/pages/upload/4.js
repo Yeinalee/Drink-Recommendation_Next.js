@@ -3,17 +3,24 @@ import { useRouter } from "next/router";
 import { Search2Icon } from "@chakra-ui/icons";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
-import { MOCKUP_KIND_OF_DRINKS } from "../../mockups/kindOfDrink";
-import { useCallback, useState } from "react";
-import { MOCKUP_DRINKS } from "../../mockups/drinks";
+import { useCallback, useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
+import useAlcoholsWithoutQuery from "../../hooks/useAlcoholsWithoutQuery";
 
 function Upload4Page() {
+  const { data } = useAlcoholsWithoutQuery();
+
   const router = useRouter();
 
-  const [drinks, setDrinks] = useState(
-    MOCKUP_DRINKS.map((drink) => ({ ...drink, selected: false }))
-  );
+  const [drinks, setDrinks] = useState([]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setDrinks(data.map((drink) => ({ ...drink, selected: false })));
+  }, [data]);
 
   const [selectedCount, setSelectedCount] = useState(0);
 
@@ -64,7 +71,7 @@ function Upload4Page() {
             }}
             selected={drink.selected}
             name={drink.name}
-            imageSrc={drink.photo}
+            imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + drink.photoKey}
           />
         ))}
       </SimpleGrid>
