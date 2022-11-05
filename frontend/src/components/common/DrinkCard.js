@@ -5,7 +5,7 @@ import { AiFillHeart, AiOutlineComment } from "react-icons/ai";
 
 function DrinkCard({ imageSrc, imageAlt, name, description, likeCount, commentCount }) {
   return (
-    <Box borderRadius="24px" bgColor="white">
+    <Box minWidth="100px" borderRadius="24px" bgColor="white">
       <Flex direction="column">
         <Box position="relative" height="200px">
           <Image
