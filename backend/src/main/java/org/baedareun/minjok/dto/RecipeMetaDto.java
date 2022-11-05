@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RecipeDto {
+public class RecipeMetaDto {
     private final int id;
     private final String name;
 }
