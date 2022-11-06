@@ -3,27 +3,43 @@ import { useRouter } from "next/router";
 import { Search2Icon } from "@chakra-ui/icons";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
 import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
-import { useCallback, useState } from "react";
-import { MOCKUP_DRINKS } from "../../mockups/drinks";
+import { useCallback, useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEY } from "../../constants/localStorage";
+import useAlcohols from "../../hooks/useAlcohols";
 
 function IngredientsSearchPage() {
+  const [alcoholTypes, setAlcoholTypes] = useState([]);
+  useEffect(() => {
+    const data = localStorage.getItem(LOCAL_STORAGE_KEY.SEARCH_KINDS_KEY);
+    if (!data) {
+      return;
+    }
+    setAlcoholTypes(JSON.parse(data));
+  }, []);
+
+  const { data } = useAlcohols(alcoholTypes);
+
   const router = useRouter();
 
-  const [ingredients, setIngredients] = useState(
-    MOCKUP_DRINKS.map((kind) => ({ ...kind, selected: false }))
-  );
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setIngredients(data.map((ingredient) => ({ ...ingredient, selected: false })));
+  }, [data]);
 
   const [selectedCount, setSelectedCount] = useState(0);
 
   const handleClickNextButton = useCallback(() => {
     const selectedTags = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY.SEARCH_TAGS_KEY));
-    const selectedTagIds = selectedTags.map((tag) => tag.id);
     const selectedIngredientIds = ingredients
       .filter((ingredient) => ingredient.selected)
       .map((ingredient) => ingredient.id);
 
-    const tagQueries = selectedTagIds.reduce((prev, cur) => `${prev}&tag=${cur}`, "").slice(1);
+    const tagQueries = selectedTags.reduce((prev, cur) => `${prev}&tag=${cur}`, "").slice(1);
     const queryString = selectedIngredientIds.reduce(
       (prev, cur) => `${prev}&alcoholId=${cur}`,
       tagQueries
@@ -70,7 +86,7 @@ function IngredientsSearchPage() {
             }}
             selected={ingredient.selected}
             name={ingredient.name}
-            imageSrc={ingredient.photo}
+            imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + ingredient.photoKey}
           />
         ))}
       </SimpleGrid>

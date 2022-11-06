@@ -1,11 +1,16 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import DrinkCard from "../../components/common/DrinkCard";
 import SearchSectionLayout from "../../components/pages/search/SearchSectionLayout";
-import { MOCKUP_RECIPES } from "../../mockups/recipes";
+import useSWR from "swr";
+import { fetcher } from "../../utils/fetcher";
 
-function TagSearchPage() {
+function SearchResultPage() {
   const router = useRouter();
+
+  const { data, error } = useSWR(`/recipes?${router.asPath.split("?")[1]}`, fetcher);
+
+  const loading = !data && !error;
 
   return (
     <SearchSectionLayout
@@ -16,19 +21,22 @@ function TagSearchPage() {
       }}
     >
       <SimpleGrid columns={2} spacing="20px">
-        {MOCKUP_RECIPES.map((drink, idx) => (
-          <DrinkCard
-            key={idx}
-            imageSrc={drink.imageSrc}
-            name={drink.name}
-            description={drink.description}
-            likeCount={drink.likeCount}
-            commentCount={drink.commentCount}
-          />
-        ))}
+        {!loading && data.length === 0 ? (
+          <Text>검색 결과가 없습니다.</Text>
+        ) : (
+          data?.map((drink) => (
+            <DrinkCard
+              key={drink.id}
+              imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + drink.photoKey}
+              name={drink.name}
+              description={drink.description}
+              likeCount={drink.likeCount}
+            />
+          ))
+        )}
       </SimpleGrid>
     </SearchSectionLayout>
   );
 }
 
-export default TagSearchPage;
+export default SearchResultPage;

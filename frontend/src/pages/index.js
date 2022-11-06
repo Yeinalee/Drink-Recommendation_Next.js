@@ -9,14 +9,18 @@ import {
   Stack,
   SimpleGrid,
   IconButton,
+  Skeleton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import DrinkCard from "../components/common/DrinkCard";
-import drinkImage from "/public/images/drink.png";
 import { AddIcon } from "@chakra-ui/icons";
-import { MOCKUP_RECIPES } from "../mockups/recipes";
+import useSWR from "swr";
+import { fetcher } from "../utils/fetcher";
 
 function MainPage() {
+  const { data, error } = useSWR("/recipes/popular", fetcher);
+  const loading = !data && !error;
+
   const router = useRouter();
 
   return (
@@ -29,11 +33,10 @@ function MainPage() {
         paddingTop={"40px"}
         paddingBottom={"20px"}
       >
-        <Box position="relative" height="30px" />
-        <Heading size="lg" color="black">
-          알는척
+        <Heading fontSize="24px" color="black">
+          알는체
         </Heading>
-        <Heading size="2xl" color="white" paddingTop={"30px"} paddingBottom={"30px"}>
+        <Heading fontSize="32px" color="white" paddingTop={"30px"} paddingBottom={"30px"}>
           미지의 주류 레시피의 세계에 오신걸 환영해요!
         </Heading>
         <Stack spacing={4}>
@@ -56,34 +59,40 @@ function MainPage() {
               }}
               size="md"
               placeholder="맞춤 꿀조합 레시피를 찾아드려요!"
-              fontSize={"20px"}
+              fontSize={"18px"}
               focusBorderColor="white"
               backgroundColor="white"
               borderRadius={100}
               paddingTop="10px"
               paddingBottom="10px"
-              marginBottom="20px"
               h="48px"
             />
           </InputGroup>
         </Stack>
       </Box>
-      <Heading size="lg" color="black" paddingTop="20px" paddingLeft={"20px"} paddingRight={"20px"}>
+      <Heading
+        fontSize="24px"
+        color="black"
+        paddingTop="20px"
+        paddingLeft={"20px"}
+        paddingRight={"20px"}
+      >
         11월의 인기 레시피
       </Heading>
-      <SimpleGrid columns={2} spacing="15px" padding="20px">
-        {MOCKUP_RECIPES.map((recipe) => (
-          <DrinkCard
-            id={recipe.id}
-            key={recipe.id}
-            imageSrc={recipe.imageSrc}
-            name={recipe.name}
-            description={recipe.description}
-            likeCount={recipe.likeCount}
-            commentCount={recipe.commentCount}
-          />
-        ))}
-      </SimpleGrid>
+      <Skeleton isLoaded={!loading}>
+        <SimpleGrid columns={2} spacing="15px" padding="20px">
+          {data?.map((recipe) => (
+            <DrinkCard
+              id={recipe.id}
+              key={recipe.id}
+              imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + recipe.photoKey}
+              name={recipe.name}
+              description={recipe.description}
+              likeCount={recipe.likeCount}
+            />
+          ))}
+        </SimpleGrid>
+      </Skeleton>
       <IconButton
         onClick={() => router.push("/upload/1")}
         backgroundColor={"primary"}
