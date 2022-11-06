@@ -87,7 +87,7 @@ function MainPage() {
             <DrinkCard
               id={recipe.id}
               key={recipe.id}
-              imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + recipe.photoKey}
+              imageSrc={recipe.photoUrl}
               name={recipe.name}
               description={recipe.description}
               likeCount={recipe.likeCount}
