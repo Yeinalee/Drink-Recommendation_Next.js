@@ -19,6 +19,7 @@ import useSWR from "swr";
 import { fetcher } from "../../utils/fetcher";
 import SimpleDrinkCard from "../../components/common/SimpleDrinkCard";
 import { serverAxios } from "../../utils/axios";
+import FullPageLoading from "../../components/common/FullPageLoading";
 
 function DetailPage() {
   const router = useRouter();
@@ -28,7 +29,7 @@ function DetailPage() {
 
   const loading = !data && !error;
 
-  if (loading) return "loading";
+  if (loading) return <FullPageLoading />;
 
   return (
     <Box>
