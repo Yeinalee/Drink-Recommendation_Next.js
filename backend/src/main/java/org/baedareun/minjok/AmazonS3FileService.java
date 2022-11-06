@@ -26,8 +26,7 @@ public class AmazonS3FileService {
     public String add(MultipartFile multipartFile, String path) {
         String key = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(
             multipartFile.getOriginalFilename());
-        path = path + "/" + UUID.randomUUID() + "." + StringUtils.getFilenameExtension(
-            multipartFile.getOriginalFilename());
+        path = path + "/" + key;
 
         try {
             amazonS3Client.putObject(new PutObjectRequest(bucket,

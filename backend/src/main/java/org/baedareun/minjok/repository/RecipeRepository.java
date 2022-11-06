@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
-    @Query("select r from Recipe r join Tag t on r.id=t.recipe.id where t.type in :tagTypes")
+    @Query("select distinct r from Recipe r join Tag t on r.id=t.recipe.id where t.type in :tagTypes")
     List<Recipe> findByTags(List<TagType> tagTypes);
 
-    @Query("select r from Recipe r order by r.likeCount desc")
+    @Query("select distinct r from Recipe r order by r.likeCount desc")
     List<Recipe> findAllPopular();
 }
