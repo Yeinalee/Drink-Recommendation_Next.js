@@ -49,7 +49,7 @@ function DetailPage() {
                 onClick={() => {
                   try {
                     serverAxios.post(`/recipes/${recipeId}/likeCount`);
-                    mutate({ ...data, likeCount: data.likeCount + 1 });
+                    mutate({ ...data, likeCount: data.likeCount + 1 }, { revalidate: false });
                   } catch (e) {
                     console.log(e);
                   }
