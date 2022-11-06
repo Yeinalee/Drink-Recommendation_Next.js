@@ -26,6 +26,7 @@ function SearchResultPage() {
         ) : (
           data?.map((drink) => (
             <DrinkCard
+              id={drink.id}
               key={drink.id}
               imageSrc={drink.photoUrl}
               name={drink.name}
