@@ -7,5 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class AlcoholTypeDto {
     private final String name;
-    private final String photoKey;
+    private final String photoUrl;
 }

@@ -24,7 +24,7 @@ public class AlcoholsController {
     @GetMapping("types")
     public List<AlcoholTypeDto> getAlcoholTypes() {
         return Arrays.stream(AlcoholType.values())
-            .map(alcoholType -> new AlcoholTypeDto(alcoholType.getName(), alcoholType.getPhotoKey()))
+            .map(alcoholType -> new AlcoholTypeDto(alcoholType.getName(), alcoholType.getPhotoUrl()))
             .sorted(Comparator.comparing(AlcoholTypeDto::getName))
             .collect(Collectors.toList());
     }

@@ -12,3 +12,15 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA3WSQMNK5AJ5FIRFH
+      secret-key: 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
+    s3:
+      bucket: knowalcohol
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false

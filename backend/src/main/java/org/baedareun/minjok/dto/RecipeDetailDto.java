@@ -16,7 +16,7 @@ public class RecipeDetailDto {
     private final String name;
     private final String description;
     private final String ingredient;
-    private final String photoKey;
+    private final String photoUrl;
     private final int likeCount;
     private final String detailSteps;
     private final List<String> tags;
@@ -27,7 +27,7 @@ public class RecipeDetailDto {
         this.name = recipe.getName();
         this.description = recipe.getDescription();
         this.ingredient = recipe.getIngredient();
-        this.photoKey = "static/alcohols/" + recipe.getPhoto();
+        this.photoUrl = "https://knowalcohol.s3.ap-northeast-2.amazonaws.com/static/alcohols/" + recipe.getPhoto();
         this.likeCount = recipe.getLikeCount();
         this.detailSteps = recipe.getDetailSteps();
         this.tags = tags.stream().map(Tag::getType).map(TagType::getName).distinct().collect(

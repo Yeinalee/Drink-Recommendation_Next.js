@@ -5,13 +5,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
+import org.baedareun.minjok.AmazonS3FileService;
 import org.baedareun.minjok.dto.RecipeDetailDto;
-import org.baedareun.minjok.dto.RecipeMetaDto;
 import org.baedareun.minjok.dto.RecipeListItemDto;
+import org.baedareun.minjok.dto.RecipeMetaDto;
 import org.baedareun.minjok.dto.RecipeRequestDto;
 import org.baedareun.minjok.entity.Alcohol;
 import org.baedareun.minjok.entity.Recipe;
@@ -41,21 +40,23 @@ public class RecipeController {
     private final RecipeAlcoholRepository recipeAlcoholRepository;
     private final AlcoholRepository alcoholRepository;
     private final TagRepository tagRepository;
+    private final AmazonS3FileService s3FileService;
 
     @Transactional
     @PostMapping("")
     public RecipeMetaDto saveRecipe(@ModelAttribute RecipeRequestDto recipeRequestDto) throws IOException {
         // 파일 저장
         MultipartFile multipartFile = recipeRequestDto.getFile();
-        File file = new File("src/main/resources/static/alcohols/" + multipartFile.getOriginalFilename());
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        Path path = Paths.get(file.getAbsolutePath()).toAbsolutePath();
-        multipartFile.transferTo(path.toFile());
+//        File file = new File("src/main/resources/static/alcohols/" + multipartFile.getOriginalFilename());
+//        if (!file.exists()) {
+//            file.mkdirs();
+//        }
+//        Path path = Paths.get(file.getAbsolutePath()).toAbsolutePath();
+//        multipartFile.transferTo(path.toFile());
+        String key = s3FileService.add(multipartFile, "static/alcohols");
 
         // Recipe 저장
-        Recipe recipe = recipeRepository.save(recipeRequestDto.toEntity());
+        Recipe recipe = recipeRepository.save(recipeRequestDto.toEntity(key));
 
         // RecipeAlcohol 저장
         List<Alcohol> alcohols = alcoholRepository.findAllById(recipeRequestDto.getAlcoholId());

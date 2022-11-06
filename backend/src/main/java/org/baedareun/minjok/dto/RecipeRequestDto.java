@@ -19,12 +19,12 @@ public class RecipeRequestDto {
     private List<String> tag;
     private List<Integer> alcoholId;
 
-    public Recipe toEntity() {
+    public Recipe toEntity(String key) {
         return new Recipe(
             this.name,
             this.description,
             this.ingredient,
-            this.file.getOriginalFilename(),
+            key,
             this.getDetailSteps()
         );
     }

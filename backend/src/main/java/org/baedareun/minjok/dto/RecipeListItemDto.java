@@ -9,7 +9,7 @@ import org.baedareun.minjok.entity.Recipe;
 public class RecipeListItemDto {
     private final int id;
     private final String name;
-    private final String photoKey;
+    private final String photoUrl;
     private final String description;
     private final int likeCount;
 
@@ -17,7 +17,7 @@ public class RecipeListItemDto {
         return new RecipeListItemDto(
             recipe.getId(),
             recipe.getName(),
-            "static/alcohols/" + recipe.getPhoto(),
+            "https://knowalcohol.s3.ap-northeast-2.amazonaws.com/static/alcohols/" + recipe.getPhoto(),
             recipe.getDescription(),
             recipe.getLikeCount()
         );

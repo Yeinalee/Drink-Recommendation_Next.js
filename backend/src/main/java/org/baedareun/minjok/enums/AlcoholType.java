@@ -12,19 +12,19 @@ public enum AlcoholType {
     BEER("맥주", "beer.png");
 
     final private String name;
-    final private String photoKey;
+    final private String photoUrl;
 
-    AlcoholType(String name, String photoKey) {
+    AlcoholType(String name, String photoUrl) {
         this.name = name;
-        this.photoKey = photoKey;
+        this.photoUrl = photoUrl;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getPhotoKey() {
-        return "static/alcohols/types/" + photoKey;
+    public String getPhotoUrl() {
+        return "https://knowalcohol.s3.ap-northeast-2.amazonaws.com/static/alcohols/types/" + photoUrl;
     }
 
     public static AlcoholType of(String type) {
