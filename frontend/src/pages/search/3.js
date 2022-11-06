@@ -86,7 +86,7 @@ function IngredientsSearchPage() {
             }}
             selected={ingredient.selected}
             name={ingredient.name}
-            imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + ingredient.photoKey}
+            imageSrc={ingredient.photoUrl}
           />
         ))}
       </SimpleGrid>

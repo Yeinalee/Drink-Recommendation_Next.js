@@ -71,7 +71,7 @@ function Upload4Page() {
             }}
             selected={drink.selected}
             name={drink.name}
-            imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + drink.photoKey}
+            imageSrc={drink.photoUrl}
           />
         ))}
       </SimpleGrid>

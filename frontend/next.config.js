@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
 
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "knowalcohol.s3.ap-northeast-2.amazonaws.com"],
   },
 };
 

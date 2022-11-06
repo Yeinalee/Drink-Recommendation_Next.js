@@ -16,6 +16,8 @@ import DrinkCard from "../components/common/DrinkCard";
 import { AddIcon } from "@chakra-ui/icons";
 import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
+import logoImage from "/public/images/logo.jpeg";
+import Image from "next/image";
 
 function MainPage() {
   const { data, error } = useSWR("/recipes/popular", fetcher);
@@ -33,9 +35,9 @@ function MainPage() {
         paddingTop={"40px"}
         paddingBottom={"20px"}
       >
-        <Heading fontSize="24px" color="black">
-          알는체
-        </Heading>
+        <Box position="relative" borderRadius="50%" overflow="hidden" width="64px" height="64px">
+          <Image src={logoImage} alt="" layout="fill" />
+        </Box>
         <Heading fontSize="32px" color="white" paddingTop={"30px"} paddingBottom={"30px"}>
           미지의 주류 레시피의 세계에 오신걸 환영해요!
         </Heading>
@@ -85,7 +87,7 @@ function MainPage() {
             <DrinkCard
               id={recipe.id}
               key={recipe.id}
-              imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + recipe.photoKey}
+              imageSrc={recipe.photoUrl}
               name={recipe.name}
               description={recipe.description}
               likeCount={recipe.likeCount}
