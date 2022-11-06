@@ -7,7 +7,13 @@ import Link from "next/link";
 function DrinkCard({ id, imageSrc, imageAlt, name, description, likeCount, commentCount }) {
   return (
     <Link href={`/recipes/${id}`}>
-      <Box _hover={{ cursor: "pointer" }} minWidth="100px" borderRadius="24px" bgColor="white">
+      <Box
+        _hover={{ cursor: "pointer" }}
+        minWidth="100px"
+        borderRadius="24px"
+        bgColor="white"
+        overflow="hidden"
+      >
         <Flex direction="column">
           <Box position="relative" height="200px">
             <Image
