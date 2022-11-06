@@ -43,12 +43,6 @@ function Upload4Page() {
       buttonText="다음 단계로"
       disableButton={selectedCount <= 0}
     >
-      <InputGroup size="lg" alignItems="center" marginBottom="20px">
-        {/* eslint-disable-next-line react/no-children-prop */}
-        <InputLeftElement pointerEvents="none" children={<Search2Icon color="gray.400" />} />
-        <Input variant="filled" bgColor="white" borderRadius="99px" placeholder="주류 찾기" />
-      </InputGroup>
-
       <SimpleGrid columns={2} spacing="20px">
         {drinks.map((drink, idx) => (
           <SimpleDrinkCard
