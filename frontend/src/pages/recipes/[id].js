@@ -67,12 +67,7 @@ function DetailPage() {
         <Box minWidth="200px" borderRadius="24px" bgColor="white" padding="20px">
           <Flex direction="column">
             <Box position="relative" height="200px">
-              <Image
-                src={process.env.NEXT_PUBLIC_SERVER_URL + "/" + data.photoKey}
-                alt={"주류 이미지"}
-                layout="fill"
-                objectFit="contain"
-              />
+              <Image src={data.photoUrl} alt={"주류 이미지"} layout="fill" objectFit="contain" />
             </Box>
           </Flex>
         </Box>
@@ -110,7 +105,7 @@ function DetailPage() {
                   key={alcohol.id}
                   minWidth="185px"
                   name={alcohol.name}
-                  imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + alcohol.photoKey}
+                  imageSrc={alcohol.photoUrl}
                 />
               ))}
             </HStack>

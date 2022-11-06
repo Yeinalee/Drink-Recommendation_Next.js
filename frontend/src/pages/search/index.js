@@ -27,7 +27,7 @@ function SearchResultPage() {
           data?.map((drink) => (
             <DrinkCard
               key={drink.id}
-              imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + drink.photoKey}
+              imageSrc={drink.photoUrl}
               name={drink.name}
               description={drink.description}
               likeCount={drink.likeCount}

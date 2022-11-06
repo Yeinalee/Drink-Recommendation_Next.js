@@ -64,7 +64,7 @@ function PreferredKindSearchPage() {
             selected={kind.selected}
             key={idx}
             name={kind.name}
-            imageSrc={process.env.NEXT_PUBLIC_SERVER_URL + "/" + kind.photoKey}
+            imageSrc={kind.photoUrl}
           />
         ))}
       </SimpleGrid>
